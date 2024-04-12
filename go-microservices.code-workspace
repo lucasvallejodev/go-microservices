@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "broker-server"
+		},
+		{
+			"path": "auth-server"
 		}
 	],
 	"settings": {}
