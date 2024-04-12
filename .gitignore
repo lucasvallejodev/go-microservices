@@ -1,1 +1,6 @@
+# Ignoring binaries
 brokerApp
+authApp
+
+# Ignoring DB Data
+db-data
