@@ -61,7 +61,7 @@ func (app *Config) authentica(w http.ResponseWriter, a AuthPayload) {
 
 	defer response.Body.Close()
 
-	if response.StatusCode != http.StatusUnauthorized {
+	if response.StatusCode == http.StatusUnauthorized {
 		app.errorJSON(w, errors.New("invalid credentials"), response.StatusCode)
 		return
 	}
