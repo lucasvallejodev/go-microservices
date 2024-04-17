@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "auth-server"
+		},
+		{
+			"path": "logger-server"
 		}
 	],
 	"settings": {}
