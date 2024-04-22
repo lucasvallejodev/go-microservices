@@ -1,6 +1,7 @@
 # Ignoring binaries
 brokerApp
 authApp
+loggerApp
 
 # Ignoring DB Data
 db-data
