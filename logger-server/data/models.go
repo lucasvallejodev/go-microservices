@@ -26,11 +26,11 @@ type Models struct {
 }
 
 type LogEntry struct {
-	ID        string    `bson:"_id, omitempty" json:"id, omitempty"`
-	Name      string    `bson:"name" json:"name"`
-	Data      string    `bson:"data" json:"data"`
-	CreatedAt time.Time `bson:"created_at" json:"created_at"`
-	UpdatedAt time.Time `bson:"updated_at" json:"updated_at"`
+	ID        primitive.ObjectID `bson:"_id" json:"id"`
+	Name      string             `bson:"name" json:"name"`
+	Data      string             `bson:"data" json:"data"`
+	CreatedAt time.Time          `bson:"created_at" json:"created_at"`
+	UpdatedAt time.Time          `bson:"updated_at" json:"updated_at"`
 }
 
 const dbTimeout = time.Second * 15
@@ -39,6 +39,7 @@ func (l *LogEntry) Insert(entry LogEntry) error {
 	collection := client.Database("logs").Collection("logs")
 
 	_, err := collection.InsertOne(context.TODO(), LogEntry{
+		ID:        primitive.NewObjectID(),
 		Name:      entry.Name,
 		Data:      entry.Data,
 		CreatedAt: time.Now(),
@@ -125,15 +126,8 @@ func (l *LogEntry) Update() (*mongo.UpdateResult, error) {
 
 	collection := client.Database("logs").Collection("logs")
 
-	docID, err := primitive.ObjectIDFromHex(l.ID)
-
-	if err != nil {
-		log.Println("Error converting ID to hex", err)
-		return nil, err
-	}
-
 	result, err := collection.UpdateOne(
-		ctx, bson.M{"_id": docID},
+		ctx, bson.M{"_id": l.ID},
 		bson.D{
 			{Key: "$set", Value: bson.D{
 				{Key: "name", Value: l.Name},
