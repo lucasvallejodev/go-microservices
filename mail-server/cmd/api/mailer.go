@@ -45,12 +45,12 @@ func (m *Mail) SendSMTPMessage(msg Message) error {
 
 	msg.DataMap = data
 
-	formattedMessage, err := m.buildHTMLMessage(*msg)
+	formattedMessage, err := m.buildHTMLMessage(msg)
 	if err != nil {
 		return err
 	}
 
-	plainMessage, err := m.buildPlainTextMessage(*msg)
+	plainMessage, err := m.buildPlainTextMessage(msg)
 	if err != nil {
 		return err
 	}
