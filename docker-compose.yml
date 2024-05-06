@@ -36,6 +36,26 @@ services:
     environment:
       DSN: "host=postgres port=5432 dbname=users user=postgres password=password sslmode=disable timezone=UTC connect_timeout=5"
 
+  mail-server:
+    build:
+      context: ./mail-server
+      dockerfile: ./mail-server.dockerfile
+    restart: always
+    ports:
+      - "8083:80"
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      MAIL_DOMAIN: localhost
+      MAIL_HOST: mailhog
+      MAIL_PORT: 1025
+      MAIL_USERNAME: ""
+      MAIL_PASSWORD: ""
+      MAIL_ENCRYPTION: none
+      FROM_ADDRESS: "no-reply@localhost"
+      FROM_NAME: "No Reply"
+
   postgres:
     image: 'postgres:14.2'
     ports:

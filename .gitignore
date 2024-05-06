@@ -2,6 +2,7 @@
 brokerApp
 authApp
 loggerApp
+mailApp
 
 # Ignoring DB Data
 db-data
