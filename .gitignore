@@ -3,6 +3,7 @@ brokerApp
 authApp
 loggerApp
 mailApp
+frontApp
 
 # Ignoring DB Data
 db-data
