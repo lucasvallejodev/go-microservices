@@ -17,6 +17,9 @@
 		},
 		{
 			"path": "mail-server"
+		},
+		{
+			"path": "listener-server"
 		}
 	],
 	"settings": {}
